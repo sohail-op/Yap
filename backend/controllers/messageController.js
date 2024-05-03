@@ -3,6 +3,9 @@ import asyncHandler from "express-async-handler";
 import Conversation from "../model/conversationModel.js";
 import Message from "../model/messageModel.js";
 
+//@des send a message
+//@route POST /api/messages/send/:id
+//@access Private
 export const sendMessage = asyncHandler(async (req, res) => {
   const { id: receiverId } = req.params;
   const senderId = req.user._id;
@@ -32,6 +35,9 @@ export const sendMessage = asyncHandler(async (req, res) => {
   res.status(201).json({ message: newMessage });
 });
 
+//@des get a message
+//@route GET /api/messages/:id
+//@access Private
 export const getMessage = asyncHandler(async (req, res) => {
   const { id: receiverId } = req.params;
   const senderId = req.user._id;

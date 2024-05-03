@@ -4,19 +4,22 @@ import asyncHandler from "express-async-handler";
 import User from "../model/userModel.js";
 import { gentoken } from "../util/gentoken.js";
 
+//@des Sign-up a user
+//@route POST /api/auth/signup
+//@access Public
 export const signup = asyncHandler(async (req, res) => {
   const { fullName, userName, gender, password, confirmPassword } = req.body;
   if (password !== confirmPassword) {
-    res.status(400).json({ message: "Password do not match" });
+    res.status(400).json({ error: "Password do not match" });
   }
 
   const user = await User.findOne({ userName });
   if (user) {
-    res.status(400).json({ message: "User already exist" });
+    res.status(400).json({ error: "User already exist" });
   }
 
   // if(!fullName || !userName || !gender){
-  //   res.status(400).json({message: "Please enter all fields"})
+  //   res.status(400).json({error: "Please enter all fields"})
   // }
 
   const salt = await bcrypt.genSalt(12);
@@ -42,21 +45,23 @@ export const signup = asyncHandler(async (req, res) => {
       profile: newUser.profile,
     });
   } else {
-    res.status(400).json({ message: "Invalid user data" });
+    res.status(400).json({ error: "Invalid user data" });
   }
-  // res.send(`Signup Page`);
 });
 
+//@des Login a user
+//@route POST /api/auth/login
+//@access Public
 export const login = asyncHandler(async (req, res) => {
   const { userName, password } = req.body;
   if (!password || !userName) {
-    res.status(400).json({ message: "Please enter both fields" });
+    res.status(400).json({ error: "Please enter both fields" });
   }
 
   const user = await User.findOne({ userName });
 
   // if(!user){
-  //   res.status(400).json({message: "User not Found"})
+  //   res.status(400).json({messageerror "User not Found"})
   // }
 
   if (user && (await bcrypt.compare(password, user?.password || ""))) {
@@ -68,14 +73,14 @@ export const login = asyncHandler(async (req, res) => {
       profile: user.profile,
     });
   } else {
-    res.status(401).json({ message: "Invalid credential" });
+    res.status(401).json({ error: "Invalid credential" });
   }
-
-  // res.send(`Login Page`);
 });
 
+//@des Logout a user
+//@route POST /api/auth/logout
+//@access Public
 export const logout = asyncHandler((req, res) => {
   res.cookie("jwt: ", "", { maxAge: 0 });
   res.status(200).json({ message: "Logged out successfully" });
-  // res.send(`getLogout Page`);
 });
