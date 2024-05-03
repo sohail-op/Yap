@@ -1,16 +1,27 @@
 import asyncHandler from "express-async-handler";
 import jwt from "jsonwebtoken";
 
-const validateToken = (req, res, next) => {
-  let token = req.cookie.jwt;
+import User from "../model/userModel.js";
+
+const validateToken = asyncHandler(async (req, res, next) => {
+  let token = req.cookies.jwt;
 
   if (!token) {
-    res.status(401).json({ message: "Unathorized - No Token provided" });
+    res.status(401).json({ error: "Unathorized - No Token provided" });
   }
-  const verify = jwd.verify(token, process.env.JWT_SECRET);
 
-  if (!verify) {
-    res.status(401).json({ message: "Unathorized - Invalid Token" });
+  const decoded = jwt.decode(token, process.env.JWT_SECRET);
+
+  if (!decoded) {
+    res.status(401).json({ error: "Unathorized - Invalid Token" });
   }
-  //unfinished : resume from here
-};
+  const user = await User.findById(decoded.userid).select("-password");
+
+  if (!user) {
+    res.status(401).json({ error: "User not found" });
+  }
+  req.user = user;
+  next();
+});
+
+export default validateToken;
