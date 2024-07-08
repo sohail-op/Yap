@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Login = () => {
   return (
@@ -28,9 +29,11 @@ const Login = () => {
           </div>
         </form>
 
-        <div className="text-xs font-medium ">
+        <div className="text-xs font-medium text-center mt-2">
           Don't have account?{" "}
-          <span className="underline hover:text-blue-500">SignUp.</span>
+          <Link href="/signup">
+            <span className="underline hover:text-blue-500">SignUp.</span>
+          </Link>
         </div>
       </div>
     </div>

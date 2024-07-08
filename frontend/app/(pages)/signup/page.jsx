@@ -32,7 +32,7 @@ const signUp = () => {
     setActiveTab((current) => current - 1);
   };
 
-  const [activeTab, setActiveTab] = useState(1);
+  const [activeTab, setActiveTab] = useState(0);
 
   const formELements = [
     <Form1 data={data} handleChange={handleChange} />,
@@ -92,13 +92,13 @@ const signUp = () => {
             )}
           >
             <button
-              className="btn w-3/4 bg-white text-black border-white hover:!bg-white hover:border-white"
+              className="btn bg-white text-black border-white hover:!bg-white hover:border-white w-2/3"
               onClick={prev}
             >
               Prev
             </button>
 
-            <button className="btn w-3/4 bg-white text-black border-white hover:!bg-white hover:border-white">
+            <button className="btn bg-white text-black border-white hover:!bg-white hover:border-white w-2/3">
               Submit
             </button>
           </span>
@@ -116,3 +116,6 @@ const signUp = () => {
 };
 
 export default signUp;
+
+// might fix css in form2.
+// fix button size in form2 and form3.
