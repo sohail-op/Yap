@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 
 import Conversation from "../model/conversationModel.js";
 import Message from "../model/messageModel.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 //@des send a message
 //@route POST /api/messages/send/:id
@@ -31,6 +32,11 @@ export const sendMessage = asyncHandler(async (req, res) => {
   }
   await newMessage.save();
   await conversation.save();
+
+  const receiverSocketId = getReceiverSocketId(receiverId);
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("newMessage", newMessage);
+  }
 
   res.status(201).json({ message: newMessage });
 });

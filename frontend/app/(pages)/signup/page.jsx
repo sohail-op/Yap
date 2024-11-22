@@ -6,14 +6,15 @@ import Link from "next/link";
 import Form1 from "./form1";
 import Form2 from "./form2";
 import Form3 from "./form3";
+import useSignup from "/hooks/useSignup";
 
 const signUp = () => {
   const [data, setData] = useState({
     fullName: "",
     userName: "",
     gender: "",
-    pwd: "",
-    confirmPwd: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (event) => {
@@ -22,6 +23,14 @@ const signUp = () => {
       ...data,
       [name]: value,
     });
+  };
+
+  const { signup } = useSignup();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("client side: ", data);
+    signup(data);
   };
 
   const next = () => {
@@ -98,7 +107,10 @@ const signUp = () => {
               Prev
             </button>
 
-            <button className="btn bg-white text-black border-white hover:!bg-white hover:border-white w-2/3">
+            <button
+              className="btn bg-white text-black border-white hover:!bg-white hover:border-white w-2/3"
+              onClick={handleSubmit}
+            >
               Submit
             </button>
           </span>

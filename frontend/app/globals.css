@@ -19,7 +19,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url("./../public/bg.jpg");
+    url("./../public/bg-4.jpg");
   background-position: center;
   background-size: cover;
   width: 100%;
@@ -28,6 +28,11 @@ body {
   overflow: hidden;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

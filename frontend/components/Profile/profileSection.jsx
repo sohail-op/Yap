@@ -5,17 +5,17 @@ import { useAuthContext } from "@/context/AuthContext";
 
 function ProfileSection() {
   const { selectConversation } = useConversation();
-  const { isAuthenticated } = useAuthContext();
+  const { authUserData } = useAuthContext();
 
   return (
     <div className="ml-3 mt-20 w-full h-auto rounded-2xl flex flex-col relative gap-2 pt-3">
       <div className=" flex h-28">
-        <div className="avatar online">
+        <div className="avatar">
           <img
             src={
               selectConversation
                 ? selectConversation.profilePic
-                : isAuthenticated.profilePic
+                : authUserData?.profilePic
             }
             alt="Pfp"
             className=" rounded-full"
@@ -27,7 +27,7 @@ function ProfileSection() {
         <p className=" text-gray-200">
           {selectConversation
             ? selectConversation.fullName
-            : `${isAuthenticated.fullName} (You)`}
+            : `${authUserData?.fullName} (You)`}
         </p>
         {selectConversation ? (
           <p className="text-gray-200 text-xs">Last seen 5 mins ago</p>

@@ -2,15 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+
 import { useAuthContext } from "/context/AuthContext";
 
 function useSignup() {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const { updateIsAuthenticated } = useAuthContext();
+  const { updateAuthUserData } = useAuthContext();
 
-  const signup = ({
+  const signup = async ({
     fullName,
     userName,
     gender,
@@ -29,7 +30,7 @@ function useSignup() {
       });
       if (!success) return toast.error(`Something went wrong`);
 
-      axios
+      await axios
         .post("http://localhost:5000/api/auth/signup", {
           fullName: fullName,
           userName: userName,
@@ -37,10 +38,10 @@ function useSignup() {
           password: password,
           confirmPassword: confirmPassword,
         })
-        .then(function (data) {
+        .then(function (res) {
           toast.success("signUp Successful");
-          localStorage.setItem("chat-user", JSON.stringify(data));
-          updateIsAuthenticated(data);
+          localStorage.setItem("chat-user", JSON.stringify(res.data));
+          updateAuthUserData(res.data);
           router.push("/");
         });
     } catch (error) {

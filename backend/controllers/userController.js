@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 
 import User from "../model/userModel.js";
 
-//@des get all user (except loggedIn user)
+//@des Get all users except the logged-in user
 //@route GET /api/
 //@access Private
 export const getUsersForSidebar = asyncHandler(async (req, res) => {

@@ -12,8 +12,8 @@ const Form2 = (props) => {
             <input
               type="radio"
               name="gender"
-              value="male"
-              checked={data.gender === "male"}
+              value="Male"
+              checked={data.gender === "Male"}
               onChange={handleChange}
               className="h-4 w-4 cursor-pointer"
             />
@@ -23,8 +23,8 @@ const Form2 = (props) => {
             <input
               type="radio"
               name="gender"
-              value="female"
-              checked={data.gender === "female"}
+              value="Female"
+              checked={data.gender === "Female"}
               onChange={handleChange}
               className="h-4 w-4 cursor-pointer"
             />

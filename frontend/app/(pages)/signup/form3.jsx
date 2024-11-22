@@ -9,18 +9,18 @@ const Form3 = (props) => {
         type="password"
         placeholder="Password"
         className="input w-3/4 backdrop-filter backdrop-blur-md bg-opacity-10 placeholder-white border-white"
-        value={data.pwd}
+        value={data.password}
         onChange={handleChange}
-        name="pwd"
+        name="password"
       />
 
       <input
         type="password"
         placeholder="confirm Password"
         className="input w-3/4 backdrop-filter backdrop-blur-md bg-opacity-10 placeholder-white border-white"
-        value={data.confirmPwd}
+        value={data.confirmPassword}
         onChange={handleChange}
-        name="confirmPwd"
+        name="confirmPassword"
       />
     </form>
   );

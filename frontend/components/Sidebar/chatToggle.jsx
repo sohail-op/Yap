@@ -36,9 +36,11 @@ function ChatToggle() {
         </div>
       </div>
 
-      <div className="divider mt-4 -mb-4 py-0 h-1 bg-gray-400 blur-[1px]" />
+      {/* <div className="divider mt-4 -mb-4 py-0 h-1 bg-gray-600  w-11/12 rounded-2xl" /> */}
 
-      <div className="flex flex-col items-center text-gray-100 rounded-2xl p-4  w-[20vw] ">
+      <div className="divider mt-3 py-0 h-1 bg-gray-600 w-full rounded-2xl " />
+
+      <div className="flex flex-col items-center text-gray-100 rounded-2xl ">
         {activeTab === "chat" ? <Conversations /> : <Setting />}
       </div>
     </>

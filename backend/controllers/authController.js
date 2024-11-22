@@ -15,7 +15,7 @@ export const signup = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ userName });
   if (user) {
-    res.status(400).json({ error: "User already exist" });
+    res.status(409).json({ error: "User already exist" });
   }
 
   // if(!fullName || !userName || !gender){
@@ -25,26 +25,33 @@ export const signup = asyncHandler(async (req, res) => {
   const salt = await bcrypt.genSalt(12);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  const boypfp = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
-  const girlpfp = `https://avatar.iran.liara.run/public/girl?username=${userName}`;
+  // const boypfp = `https://avatar.iran.liara.run/public/boy?username=${userName}`;
+  // const girlpfp = `https://avatar.iran.liara.run/public/girl?username=${userName}`;
+
+  const rndmNum = Math.floor(Math.random() * 100);
+
+  const boypfp = `https://randomuser.me/api/portraits/men/${rndmNum}.jpg`;
+  const girlpfp = `https://randomuser.me/api/portraits/women/${rndmNum}.jpg`;
 
   const newUser = await User.create({
     fullName,
     userName,
     password: hashedPassword,
     gender,
-    profile: gender === "Male" ? boypfp : girlpfp,
+    profilePic: gender === "Male" ? boypfp : girlpfp,
   });
 
   if (newUser) {
     gentoken(newUser._id, res);
 
     res.status(201).json({
+      _id: newUser._id,
       fullName: newUser.fullName,
       userName: newUser.userName,
-      profile: newUser.profile,
+      profilePic: newUser.profilePic,
     });
   } else {
+    console.error("Error: Unable to create user");
     res.status(400).json({ error: "Invalid user data" });
   }
 });
@@ -65,15 +72,20 @@ export const login = asyncHandler(async (req, res) => {
   // }
 
   if (user && (await bcrypt.compare(password, user?.password || ""))) {
-    gentoken(user._id, res);
+    const token = gentoken(user._id, res);
 
     res.status(200).json({
+      _id: user._id,
       userName: user.userName,
       fullName: user.fullName,
-      profile: user.profile,
+      profilePic: user.profilePic,
+      token,
     });
   } else {
     res.status(401).json({ error: "Invalid credential" });
+    console.log(
+      `Error: ${req.body.userName} - ${req.body.password} - ${user?.password}`
+    );
   }
 });
 

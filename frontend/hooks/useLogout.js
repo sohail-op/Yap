@@ -1,12 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
 import { useAuthContext } from "/context/AuthContext";
 
 function useLogout() {
-  const router = useRouter();
-  const { updateIsAuthenticated } = useAuthContext();
+  const { updateAuthUserData } = useAuthContext();
   const [loading, setLoading] = useState(false);
 
   const logout = async () => {
@@ -14,7 +12,7 @@ function useLogout() {
     try {
       await axios.post("http://localhost:5000/api/auth/logout");
       localStorage.removeItem("chat-user");
-      updateIsAuthenticated(null);
+      updateAuthUserData(null);
       toast.success("Logged out successfully");
       //   router.push("/login");
     } catch (error) {
