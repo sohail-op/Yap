@@ -1,5 +1,4 @@
 <div align="left" style="position: relative;">
-<img src="https://raw.githubusercontent.com/PKief/vscode-material-icon-theme/ec559a9f6bfd399b82bb44393651661b08aaf7ba/icons/folder-markdown-open.svg" align="right" width="30%" style="margin: -20px 0 0 20px;">
 <h1>CHATTERJI</h1>
 <p align="left">
 	<em>Chatterji: Connect, Converse, Create Community</em>
@@ -10,13 +9,8 @@
 	<img src="https://img.shields.io/github/languages/top/sohail-op/chatterji?style=default&color=0080ff" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/sohail-op/chatterji?style=default&color=0080ff" alt="repo-language-count">
 </p>
-<p align="left"><!-- default option, no dependency badges. -->
-</p>
-<p align="left">
-	<!-- default option, no dependency badges. -->
-</p>
+
 </div>
-<br clear="right">
 
 ##  Table of Contents
 
@@ -38,6 +32,9 @@
 ##  Overview
 
 The "chatterji" project is a robust chat application built on the MERN stack, designed to facilitate real-time communication. It solves the problem of fragmented conversation experiences by providing a unified platform with features like secure user authentication, live messaging, and cross-origin resource sharing. Key benefits include a stable, consistent environment for development and deployment, thanks to its meticulous dependency management. This application is ideal for developers looking to implement or enhance real-time communication features in their web projects.
+
+![image](https://github.com/user-attachments/assets/390c3c71-3d29-4a57-a950-d6a32df40364)
+
 
 ---
 
@@ -214,40 +211,6 @@ The "chatterji" project is a robust chat application built on the MERN stack, de
 	<details> <!-- frontend Submodule -->
 		<summary><b>frontend</b></summary>
 		<blockquote>
-			<table>
-			<tr>
-				<td><b><a href='https://github.com/sohail-op/chatterji/blob/master/frontend/next.config.mjs'>next.config.mjs</a></b></td>
-				<td>- NextConfig in the frontend directory configures URL rewrites for the project, specifically proxying API requests from the frontend to a backend server located at localhost:5000<br>- This setup simplifies development by allowing frontend components to communicate seamlessly with backend services under a unified API namespace.</td>
-			</tr>
-			<tr>
-				<td><b><a href='https://github.com/sohail-op/chatterji/blob/master/frontend/postcss.config.js'>postcss.config.js</a></b></td>
-				<td>- Configures PostCSS plugins essential for the frontend's styling framework, specifically integrating TailwindCSS for utility-first CSS management and Autoprefixer for automatic vendor prefix addition<br>- This setup ensures consistent styling across different browsers and enhances the development experience by streamlining CSS maintenance within the project's frontend architecture.</td>
-			</tr>
-			<tr>
-				<td><b><a href='https://github.com/sohail-op/chatterji/blob/master/frontend/.eslintrc.json'>.eslintrc.json</a></b></td>
-				<td>- Configures ESLint for the frontend directory, specifically extending settings from "next/core-web-vitals" to ensure code quality and performance optimization align with Next.js framework standards<br>- This setup aids in maintaining consistent coding practices and enhances the project's ability to meet modern web vitals requirements efficiently.</td>
-			</tr>
-			<tr>
-				<td><b><a href='https://github.com/sohail-op/chatterji/blob/master/frontend/package-lock.json'>package-lock.json</a></b></td>
-				<td>- The file `frontend/package-lock.json` serves a critical role in the management and consistency of the frontend application's dependencies within the larger codebase<br>- This JSON file locks down the exact versions of the npm packages that the project depends on, ensuring that all environments, from development to production, use the same versions<br>- This helps in avoiding discrepancies and potential bugs that could arise from version mismatches.
-
-In the context of the entire project, this file ensures that the frontend, which appears to be built with React and Next.js (as indicated by the dependencies like `react`, `react-dom`, and `next`), maintains a stable, consistent set of dependencies that are known to work well together<br>- This stability is crucial for the reliability and maintainability of the application, facilitating smoother updates and compatibility checks as the project evolves.
-
-Overall, the `package-lock.json` file is a foundational component that supports the frontend's infrastructure by managing dependencies efficiently, aligning with the project's need for a robust and error-resistant development environment.</td>
-			</tr>
-			<tr>
-				<td><b><a href='https://github.com/sohail-op/chatterji/blob/master/frontend/tsconfig.json'>tsconfig.json</a></b></td>
-				<td>- Configures TypeScript for the frontend module, setting strict type-checking and module resolution tailored for a modern development environment with Next.js<br>- It enhances JavaScript interoperability and supports JSX, ensuring seamless integration and efficient build processes<br>- The configuration also customizes path aliases for simplified imports across the application.</td>
-			</tr>
-			<tr>
-				<td><b><a href='https://github.com/sohail-op/chatterji/blob/master/frontend/package.json'>package.json</a></b></td>
-				<td>- Defines the configuration and dependencies for the frontend module of the application, specifying scripts for development, building, and deployment using Next.js<br>- It integrates libraries for UI components, state management, and API communication, ensuring a robust, interactive user interface aligned with modern web standards.</td>
-			</tr>
-			<tr>
-				<td><b><a href='https://github.com/sohail-op/chatterji/blob/master/frontend/tailwind.config.ts'>tailwind.config.ts</a></b></td>
-				<td>- Configures TailwindCSS for a frontend application, specifying directories for style application and extending the theme with custom gradients<br>- It integrates the DaisyUI plugin to enhance UI components<br>- This setup ensures consistent styling across all pages and components, contributing to a unified and scalable frontend architecture.</td>
-			</tr>
-			</table>
 			<details>
 				<summary><b>components</b></summary>
 				<blockquote>
