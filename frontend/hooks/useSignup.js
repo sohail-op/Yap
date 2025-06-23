@@ -31,7 +31,7 @@ function useSignup() {
       if (!success) return toast.error(`Something went wrong`);
 
       await axios
-        .post("http://localhost:5000/api/auth/signup", {
+        .post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/signup`, {
           fullName: fullName,
           userName: userName,
           gender: gender,

@@ -13,7 +13,7 @@ function useSendMessage() {
     try {
       await axios
         .post(
-          `http://localhost:5000/api/messages/send/${selectConversation._id}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/messages/send/${selectConversation._id}`,
           {
             message: message,
           },

@@ -27,9 +27,9 @@ function MessageContainer() {
 const noChatSelected = () => {
   return (
     <div className="flex justify-center items-center flex-col gap-2">
-      <p className="text-4xl">ChatterJi</p>
+      <p className="text-4xl">YAP</p>
 
-      <p className="text-xl">welcome to chatterJi, select a chat to start.</p>
+      <p className="text-xl">welcome to YAP, select a chat to start.</p>
     </div>
   );
 };

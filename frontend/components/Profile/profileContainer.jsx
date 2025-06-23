@@ -1,7 +1,7 @@
 import React from "react";
 
 import ProfileSection from "./profileSection";
-import ProfileHeader from "./ProfileHeader";
+import ProfileHeader from "./profileHeader";
 
 function ProfileContainer() {
   return (

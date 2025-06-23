@@ -18,12 +18,10 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUserData) {
-      const socket = io("http://localhost:5000", {
+      const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}`, {
         query: { userId: authUserData?._id },
       });
       setSocket(socket);
-
-      // console.log("socket auth: ", authUserData?._id);
 
       socket.on("getOnlineUsers", (users) => {
         setOnlineUsers(users);

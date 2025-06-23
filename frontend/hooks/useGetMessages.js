@@ -13,7 +13,7 @@ function useGetMessages() {
       setLoading(true);
       try {
         await axios
-          .get(`http://localhost:5000/api/messages/${selectConversation._id}`, {
+          .get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/messages/${selectConversation._id}`, {
             withCredentials: true,
           })
           .then(function (res) {

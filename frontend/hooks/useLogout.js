@@ -10,7 +10,7 @@ function useLogout() {
   const logout = async () => {
     setLoading(true);
     try {
-      await axios.post("http://localhost:5000/api/auth/logout");
+      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/logout`);
       localStorage.removeItem("chat-user");
       updateAuthUserData(null);
       toast.success("Logged out successfully");

@@ -1,6 +1,7 @@
 // import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+
 import "./globals.css";
 import { AuthContextProvider } from "@/context/AuthContext";
 import { SocketContextProvider } from "@/context/SocketContext";
@@ -8,7 +9,7 @@ import { SocketContextProvider } from "@/context/SocketContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Chatterji",
+  title: "YAP - Chat App",
   description: "Developed by Sohail Khan",
 };
 

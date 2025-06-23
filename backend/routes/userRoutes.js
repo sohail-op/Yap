@@ -4,9 +4,6 @@ import { getUsersForSidebar } from "../controllers/userController.js";
 
 const router = express.Router();
 
-router.get("/", validateToken, getUsersForSidebar);
-// router.get("/", validateToken, (req, res) => {
-//   res.status(200).json("Working");
-// });
+router.get("/getUsersForSidebar", validateToken, getUsersForSidebar);
 
 export default router;

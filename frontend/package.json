@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "Proxy": "http://localhost:5000",
+  "Proxy": "process.env.NEXT_PUBLIC_BACKEND_API_URL",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

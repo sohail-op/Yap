@@ -13,13 +13,13 @@ import connectDb from "./config/connectDb.js";
 
 dotenv.config();
 connectDb();
-// const app = express();
-const port = process.env.PORT || 5001;
 
-// enable cors
+const port = process.env.PORT || 5000;
+
+
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -32,6 +32,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/user", userRoutes);
 app.use(errorHandler);
+
+app.get("/", (req, res) => {
+  res.status(200).json("Server is running");
+});
 
 server.listen(port, () => {
   console.log(`Server is Live on http://localhost:${port}`);

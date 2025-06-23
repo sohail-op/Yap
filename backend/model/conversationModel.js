@@ -14,8 +14,13 @@ const conversationSchema = mongoose.Schema({
       default: [],
     },
   ],
-});
+  lastMessage: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Message",
+    default: null,
+  },
+}, { timestamps: true });
 
-const Coversation = mongoose.model("Coversation", conversationSchema);
+const Conversation = mongoose.model("Conversation", conversationSchema);
 
-export default Coversation;
+export default Conversation;

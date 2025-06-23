@@ -18,7 +18,7 @@ function useLogin() {
   const login = async ({ userName, password }) => {
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/login", {
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/login`, {
         userName,
         password,
       });

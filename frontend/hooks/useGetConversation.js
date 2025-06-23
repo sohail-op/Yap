@@ -1,31 +1,54 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useSocketContext } from "@/context/SocketContext";
 
 function useGetConversation() {
   const [loading, setLoading] = useState(false);
   const [conversations, setConversations] = useState([]);
+  const { socket } = useSocketContext();
 
   useEffect(() => {
     const getConversation = async () => {
       setLoading(true);
       try {
-        await axios
-          .get("http://localhost:5000/api/user ", {
-            withCredentials: true,
-          })
-          .then(function (res) {
-            setConversations(res.data);
-          });
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/user/getUsersForSidebar`, {
+          withCredentials: true,
+        });
+        setConversations(res.data);
       } catch (error) {
         toast.error(`Error: ${error.message}`);
-        console.log(`Error: ${error}`);
+        console.error("Conversation fetch error:", error);
       } finally {
         setLoading(false);
       }
     };
+
     getConversation();
   }, []);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleNewMessage = (message) => {
+      setConversations((prev) => {
+        const updated = prev.map((conv) => {
+          const match =
+            conv._id === message.senderId || conv._id === message.receiverId;
+          if (match) {
+            return {
+              ...conv,
+              lastMessage: message,
+            };
+          }
+          return conv;
+        });
+      });
+    };
+
+    socket.on("newMessage", handleNewMessage);
+    return () => socket.off("newMessage", handleNewMessage);
+  }, [socket]);
 
   return { conversations, loading };
 }

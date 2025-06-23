@@ -12,7 +12,7 @@ export const sendMessage = asyncHandler(async (req, res) => {
   const senderId = req.user._id;
   const { message } = req.body;
 
-  const conversation = await Conversation.findOne({
+  let conversation = await Conversation.findOne({
     participants: { $all: [senderId, receiverId] },
   });
 
@@ -22,21 +22,30 @@ export const sendMessage = asyncHandler(async (req, res) => {
     });
   }
 
-  const newMessage = new Message({
+  const newMessage = await Message.create({
     receiverId,
     senderId,
     message,
   });
-  if (newMessage) {
-    await conversation.messages.push(newMessage._id);
-  }
-  await newMessage.save();
+
+  conversation.messages.push(newMessage._id);
+  conversation.lastMessage = newMessage._id;
   await conversation.save();
+
+  const ioMessage = {
+    _id: newMessage._id,
+    senderId,
+    receiverId,
+    message: newMessage.message,
+    createdAt: newMessage.createdAt,
+  };
 
   const receiverSocketId = getReceiverSocketId(receiverId);
   if (receiverSocketId) {
-    io.to(receiverSocketId).emit("newMessage", newMessage);
+    io.to(receiverSocketId).emit("newMessage", ioMessage);
   }
+
+  io.to(senderId.toString()).emit("newMessage", ioMessage);
 
   res.status(201).json({ message: newMessage });
 });
@@ -53,7 +62,7 @@ export const getMessage = asyncHandler(async (req, res) => {
   }).populate("messages");
 
   if (!conversation) {
-    res.status(200).json([]);
+    return res.status(200).json([]);
   }
 
   const messages = conversation.messages;

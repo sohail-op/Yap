@@ -10,12 +10,12 @@ import { gentoken } from "../util/gentoken.js";
 export const signup = asyncHandler(async (req, res) => {
   const { fullName, userName, gender, password, confirmPassword } = req.body;
   if (password !== confirmPassword) {
-    res.status(400).json({ error: "Password do not match" });
+    return res.status(400).json({ error: "Password do not match" });
   }
 
   const user = await User.findOne({ userName });
   if (user) {
-    res.status(409).json({ error: "User already exist" });
+    return res.status(409).json({ error: "User already exist" });
   }
 
   // if(!fullName || !userName || !gender){
@@ -62,7 +62,7 @@ export const signup = asyncHandler(async (req, res) => {
 export const login = asyncHandler(async (req, res) => {
   const { userName, password } = req.body;
   if (!password || !userName) {
-    res.status(400).json({ error: "Please enter both fields" });
+    return res.status(400).json({ error: "Please enter both fields" });
   }
 
   const user = await User.findOne({ userName });
@@ -93,6 +93,10 @@ export const login = asyncHandler(async (req, res) => {
 //@route POST /api/auth/logout
 //@access Public
 export const logout = asyncHandler((req, res) => {
-  res.cookie("jwt: ", "", { maxAge: 0 });
+ res.cookie("jwt", "", {
+  httpOnly: true,
+  expires: new Date(0),
+});
+
   res.status(200).json({ message: "Logged out successfully" });
 });
