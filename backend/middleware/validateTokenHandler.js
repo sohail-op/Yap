@@ -10,14 +10,16 @@ const validateToken = asyncHandler(async (req, res, next) => {
   let token = req.cookies.jwt;
 
   if (!token) {
-    return res.status(401).json({ error: "Unathorized - No Token provided" });
+    return res.status(401).json({ error: "Unauthorized - No Token provided" });
   }
 
-  const decoded = jwt.decode(token, process.env.JWT_SECRET);
-
-  if (!decoded) {
-    return res.status(401).json({ error: "Unathorized - Invalid Token" });
+  let decoded;
+  try {
+    decoded = jwt.verify(token, process.env.JWT_SECRET);
+  } catch (err) {
+    return res.status(401).json({ error: "Unauthorized - Invalid Token" });
   }
+
   const user = await User.findById(decoded.userid).select("-password");
 
   if (!user) {

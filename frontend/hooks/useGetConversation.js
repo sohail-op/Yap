@@ -43,6 +43,7 @@ function useGetConversation() {
           }
           return conv;
         });
+        return updated;
       });
     };
 
