@@ -8,7 +8,7 @@ import Form2 from "./form2";
 import Form3 from "./form3";
 import useSignup from "/hooks/useSignup";
 
-const signUp = () => {
+const SignUp = () => {
   const [data, setData] = useState({
     fullName: "",
     userName: "",
@@ -44,9 +44,9 @@ const signUp = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const formELements = [
-    <Form1 data={data} handleChange={handleChange} />,
-    <Form2 data={data} handleChange={handleChange} />,
-    <Form3 data={data} handleChange={handleChange} />,
+    <Form1 key="form1" data={data} handleChange={handleChange} />,
+    <Form2 key="form2" data={data} handleChange={handleChange} />,
+    <Form3 key="form3" data={data} handleChange={handleChange} />,
   ];
 
   return (
@@ -127,7 +127,7 @@ const signUp = () => {
   );
 };
 
-export default signUp;
+export default SignUp;
 
 // might fix css in form2.
 // fix button size in form2 and form3.

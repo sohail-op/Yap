@@ -71,11 +71,12 @@ const Login = () => {
         </form>
 
         <div className="text-xs font-medium text-center mt-2">
-          Don't have account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup">
             <span className="underline hover:text-blue-500">SignUp.</span>
           </Link>
         </div>
+
       </div>
     </div>
   );
