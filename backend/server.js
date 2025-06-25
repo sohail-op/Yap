@@ -22,6 +22,7 @@ app.use(
     origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true,
+    allowedHeaders: ["Authorization", "Content-Type"],
   })
 );
 

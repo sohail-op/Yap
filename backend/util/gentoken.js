@@ -15,7 +15,8 @@ export const gentoken = (userid, res) => {
   res.cookie("jwt", token, {
     maxAge: 7 * 24 * 60 * 60 * 1000, //in ms
     httpOnly: true,
-    samesite: true,
+    secure: true,
+    samesite: "None",
   });
   return token;
 };
