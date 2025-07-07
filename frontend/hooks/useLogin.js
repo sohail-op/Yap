@@ -28,7 +28,7 @@ function useLogin() {
       Cookies.set("jwt", token, {
         expires: 7,
         secure: true,
-        sameSite: "Strict",
+        sameSite: "Lax",
       });
       // setIsauth(true);
       updateAuthUserData(res.data);
