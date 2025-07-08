@@ -21,6 +21,8 @@ function useLogin() {
       const res = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/auth/login`, {
         userName,
         password,
+      },{
+        withCredentials: true,
       });
 
       localStorage.setItem("chat-user", JSON.stringify(res.data));
@@ -28,7 +30,8 @@ function useLogin() {
       Cookies.set("jwt", token, {
         expires: 7,
         secure: true,
-        sameSite: "Lax",
+        sameSite: "None",
+        domain: ".ksohail.dev",
       });
       // setIsauth(true);
       updateAuthUserData(res.data);
